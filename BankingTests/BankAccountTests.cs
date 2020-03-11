@@ -8,10 +8,16 @@ namespace BankingTests
 {
     public class BankAccountTests
     {
+        BankAccount account;
+
+        public BankAccountTests()
+        {
+            account = new BankAccount();
+        }
         [Fact]
         public void NewAccountHasCorrectBalance()
         {
-            var account = new BankAccount();
+          
 
             decimal currentBalance = account.GetBalance();
 
@@ -22,7 +28,7 @@ namespace BankingTests
         public void WithdrawalDecreasesBalance()
         {
             // Arrange  - Given
-            var account = new BankAccount();
+          
             var openingBalance = account.GetBalance();
             var amountToWithdraw = 1M;
             // Act - When
@@ -38,7 +44,7 @@ namespace BankingTests
         public void DepositIncreasesBalance()
         {
             // Arrange  - Given
-            var account = new BankAccount();
+         
             var openingBalance = account.GetBalance();
             var amountToDeposit = 1M;
             // Act - When
@@ -53,7 +59,7 @@ namespace BankingTests
         [Fact]
         public void OverdraftDoesNotDecreaseBalance()
         {
-            var account = new BankAccount();
+          
             var openingBalance = account.GetBalance();
 
             try
@@ -72,7 +78,7 @@ namespace BankingTests
         [Fact]
         public void OverdraftThrowsAnException()
         {
-            var account = new BankAccount();
+          
 
             Assert.Throws<OverdraftException>(
                 () =>account.Withdraw(account.GetBalance() + 1)
