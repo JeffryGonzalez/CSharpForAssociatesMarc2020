@@ -17,10 +17,7 @@ namespace BankingTests
         [Fact]
         public void NewAccountHasCorrectBalance()
         {
-          
-
             decimal currentBalance = account.GetBalance();
-
             Assert.Equal(7000M, currentBalance);
         }
 
@@ -28,7 +25,6 @@ namespace BankingTests
         public void WithdrawalDecreasesBalance()
         {
             // Arrange  - Given
-          
             var openingBalance = account.GetBalance();
             var amountToWithdraw = 1M;
             // Act - When
@@ -59,7 +55,7 @@ namespace BankingTests
         [Fact]
         public void OverdraftDoesNotDecreaseBalance()
         {
-          
+            
             var openingBalance = account.GetBalance();
 
             try

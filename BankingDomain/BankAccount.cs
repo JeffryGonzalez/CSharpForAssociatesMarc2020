@@ -2,11 +2,12 @@
 
 namespace BankingDomain
 {
+    public enum AccountType {  Standard, Gold }
     public class BankAccount
     {
 
         private decimal CurrentBalance = 7000; // JFHCI
-
+        public AccountType TypeOfAccount = AccountType.Standard;
         public decimal GetBalance()
         {
             return CurrentBalance; 
@@ -26,6 +27,11 @@ namespace BankingDomain
 
         public void Deposit(decimal amountToDeposit)
         {
+            if(TypeOfAccount == AccountType.Gold)
+            {
+                //amountToDeposit = amountToDeposit * 1.10M;
+                amountToDeposit *= 1.10M;
+            }
             CurrentBalance += amountToDeposit;
         }
     }
