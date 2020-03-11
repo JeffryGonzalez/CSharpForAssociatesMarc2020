@@ -60,5 +60,11 @@ namespace BankingTests
 
             Assert.Equal(openingBalance, account.GetBalance());
         }
+
+        [Fact]
+        public void OverdraftThrowsAnException()
+        {
+
+        }
     }
 }
