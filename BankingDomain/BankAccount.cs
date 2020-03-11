@@ -2,14 +2,20 @@
 
 namespace BankingDomain
 {
-    public class BankAccount
+    public class BankAccount : IProvideBalances
     {
+        private ICalculateBonuses BonusCalculator;
+
+        public BankAccount(ICalculateBonuses bonusCalculator)
+        {
+            BonusCalculator = bonusCalculator;
+        }
 
         private decimal CurrentBalance = 7000; // JFHCI
 
         public decimal GetBalance()
         {
-            return CurrentBalance; 
+            return CurrentBalance;
         }
 
         public void Withdraw(decimal amountToWithdraw)
@@ -26,7 +32,9 @@ namespace BankingDomain
 
         public void Deposit(decimal amountToDeposit)
         {
-            CurrentBalance += amountToDeposit;
+            // WTCYWYH
+            decimal bonus = BonusCalculator.GetBonusFor(this, amountToDeposit);
+            CurrentBalance += amountToDeposit + bonus;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace BankingTests
 
         public BankAccountTests()
         {
-            account = new BankAccount();
+            account = new BankAccount(new DummyBonusCalculator());
         }
         [Fact]
         public void NewAccountHasCorrectBalance()
@@ -83,6 +83,16 @@ namespace BankingTests
             Assert.Throws<OverdraftException>(
                 () =>account.Withdraw(account.GetBalance() + 1)
                 );
+        }
+    }
+
+    public class DummyBonusCalculator : ICalculateBonuses
+    {
+        
+
+        public decimal GetBonusFor(IProvideBalances bankAccount, decimal amountToDeposit)
+        {
+            return 0;
         }
     }
 }
