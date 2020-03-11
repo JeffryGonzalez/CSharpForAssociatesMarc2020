@@ -56,7 +56,15 @@ namespace BankingTests
             var account = new BankAccount();
             var openingBalance = account.GetBalance();
 
-            account.Withdraw(openingBalance + 1);
+            try
+            {
+                account.Withdraw(openingBalance + 1);
+            }
+            catch (Exception)
+            {
+
+                // gulp! (intentionally swallowed so we can see the state)
+            }
 
             Assert.Equal(openingBalance, account.GetBalance());
         }
@@ -64,7 +72,11 @@ namespace BankingTests
         [Fact]
         public void OverdraftThrowsAnException()
         {
+            var account = new BankAccount();
 
+            Assert.Throws<OverdraftException>(
+                () =>account.Withdraw(account.GetBalance() + 1)
+                );
         }
     }
 }
