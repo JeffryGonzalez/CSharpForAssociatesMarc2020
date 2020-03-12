@@ -2,9 +2,9 @@
 {
     public class StandardBonusCalculator : ICalculateBonuses
     {
-        public decimal GetBonusFor(IProvideBalances bankAccount, decimal amountToDeposit)
+        public decimal GetBonusFor(IProvideBalances balanceHavingThing, decimal amountToDeposit)
         {
-            return bankAccount.GetBalance() >= 10000 ? amountToDeposit * 0.1M : 0;
+            return balanceHavingThing.GetBalance() >= 10000 ? amountToDeposit * 0.1M : 0;
         }
     }
 }

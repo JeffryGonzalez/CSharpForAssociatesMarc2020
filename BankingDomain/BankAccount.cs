@@ -5,10 +5,12 @@ namespace BankingDomain
     public class BankAccount : IProvideBalances
     {
         private ICalculateBonuses BonusCalculator;
+        private INotifyTheFeds FedNotifier;
 
-        public BankAccount(ICalculateBonuses bonusCalculator)
+        public BankAccount(ICalculateBonuses bonusCalculator, INotifyTheFeds fedNotifier)
         {
             BonusCalculator = bonusCalculator;
+            FedNotifier = fedNotifier;
         }
 
         private decimal CurrentBalance = 7000; // JFHCI
@@ -27,6 +29,7 @@ namespace BankingDomain
             else
             {
                 CurrentBalance -= amountToWithdraw;
+               FedNotifier.NotifyOfWithdrawal(this, amountToWithdraw);
             }
         }
 
